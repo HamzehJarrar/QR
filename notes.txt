@@ -1,0 +1,7 @@
+-- fix pdf clear ( done )
+-- excel ( for nec version)
+-- fix refreshing QR code
+
+additions
+-- adding some css code for done.html 
+-- adding username and password for the main page

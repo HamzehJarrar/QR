@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance System</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Attendance System</h1>
+      <div class="form-container">
+        <form action="/generate_qr" method="POST">
+          <label for="subject"
+            ><i class="fa-solid fa-book"></i> Subject Name:</label
+          >
+          <input
+            type="text"
+            name="subject"
+            id="subject"
+            placeholder="Enter subject name"
+            required
+          />
+
+          <label for="section"
+            ><i class="fa-solid fa-list-ol"></i> Section Number:</label
+          >
+          <input
+            type="number"
+            name="section"
+            id="section"
+            placeholder="Enter section number"
+            required
+          />
+
+          <button type="submit" id="generateQR">
+            <i class="fa-solid fa-play"></i> Generate QR
+          </button>
+        </form>
+      </div>
+
+      {% if qr_image_path %}
+      <div id="qrContainer" class="qr-container">
+        <div id="qrContainer" class="qr-container">
+            <h3>QR Code:</h3>
+            <img id="qrCodeImage" src="{{ qr_image_path }}" alt="QR Code" />
+        </div>
+        <form action="/stop" method="POST">
+          <button id="stopAttendance" class="stop-btn" type="submit">
+            <i class="fa-solid fa-stop"></i> Stop
+          </button>
+        </form>
+      </div>
+      {% endif %} {% if show_download %}
+      <div id="downloadOptions" class="download-options">
+        <h3>Download report as:</h3>
+        <div class="button-container">
+          <a href="{{ url_for('download_excel') }}" class="download-btn" id="downloadExcel">
+            <i class="fa-solid fa-file-excel"></i> Excel
+          </a>
+          <a href="{{ url_for('download_pdf') }}" class="downloadpdf-btn" id="downloadPDF">
+            <i class="fa-solid fa-file-pdf"></i> PDF
+          </a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
